@@ -1,4 +1,5 @@
-#include <iostream>
+#include <sstream>
+#include <cassert>
 
 using namespace std;
 
@@ -42,25 +43,26 @@ CLASS_DEF(C7,0,0,0,0,0,1,0)
 CLASS_DEF(C8,0,0,0,0,0,0,1)
 
 template<typename C>
-void capability() {
-    cout << is_constructible<C, int>::value << ", ";
-    cout << is_destructible<C>::value << ", ";
-    cout << is_constructible<C>::value << ", ";
-    cout << is_copy_constructible<C>::value << ", ";
-    cout << is_copy_assignable<C>::value << ", ";
-    cout << is_move_constructible<C>::value << ", ";
-    cout << is_move_assignable<C>::value;
-    cout << endl;
+std::string capability() {
+    stringstream ss;
+    ss << is_constructible<C, int>::value << ", ";
+    ss << is_destructible<C>::value << ", ";
+    ss << is_constructible<C>::value << ", ";
+    ss << is_copy_constructible<C>::value << ", ";
+    ss << is_copy_assignable<C>::value << ", ";
+    ss << is_move_constructible<C>::value << ", ";
+    ss << is_move_assignable<C>::value;
+    return ss.str();
 }
 
 int main() {
-    capability<C1>();
-    capability<C2>();
-    capability<C3>();
-    capability<C4>();
-    capability<C5>();
-    capability<C6>();
-    capability<C7>();
-    capability<C8>();
+    assert(capability<C1>().compare("0, 1, 1, 1, 1, 1, 1") == 0);
+    assert(capability<C2>().compare("1, 1, 0, 1, 1, 1, 1") == 0);
+    assert(capability<C3>().compare("0, 1, 1, 1, 1, 1, 1") == 0);
+    assert(capability<C4>().compare("0, 1, 1, 1, 1, 1, 1") == 0);
+    assert(capability<C5>().compare("0, 1, 0, 1, 1, 1, 1") == 0);
+    assert(capability<C6>().compare("0, 1, 1, 1, 1, 1, 1") == 0);
+    assert(capability<C7>().compare("0, 1, 0, 0, 0, 1, 0") == 0);
+    assert(capability<C8>().compare("0, 1, 1, 0, 0, 0, 1") == 0);
     return 0;
 }
