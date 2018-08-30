@@ -1,5 +1,5 @@
-// rumor says longevity happens only once withing the function receiving const C1 &, and when it returns as const C1&, it's not alive any more.
-// but the code below doesn't crash so we cannot prove that.
+// longevity happens only once withing the function receiving const C1 &, and when it returns as const C1&, it's not alive any more.
+// The code below doesn't crash with luck, but address sanitizer warns "Stack-use-after-scope"
 
 #include <string>
 #include <iostream>
@@ -29,9 +29,11 @@ private:
     int x_;
 };
 const C1& foo( const C1& s ){
+    std::cout << "exiting foo()" << std::endl;
     return s;
 }
 int main() {
     const C1& bar = foo( C1(100) );
+    std::cout << "exited foo()" << std::endl;
     std::cout << bar.x() << std::endl;
 }

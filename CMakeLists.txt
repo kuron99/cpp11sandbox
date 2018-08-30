@@ -10,3 +10,5 @@ foreach(src IN LISTS SRCS)
     add_executable("${fname}" ${src})
 endforeach()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-elide-constructors")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address,undefined,integer,nullability -fno-sanitize-recover=address,undefined,integer,nullability")

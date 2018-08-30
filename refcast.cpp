@@ -1,5 +1,5 @@
 // Difficult to understand cast between non-reference type - basic idea is variable initialization semantics in T temp = expr,
-// but sometimes constructor is called and others not.
+// but it's subject to -fno-elide-constructors option and copy elision introduced in C++17
 // On the other hand, reference types are easy - simply handle the source as target reference type. e.g. C&& -> C&, C -> C&&
 // No constructors are involved unexpectedly.
 
@@ -36,7 +36,7 @@ private:
     int x_;
 };
 
-const C1& factory(const C1& c1) {
+C1 factory() {
     return C1{};
 }
 
@@ -47,11 +47,15 @@ int main() {
     assert(static_cast<C1 &>(c1).x() == -1);
     assert(static_cast<C1 &&>(c1).x() == -1);
     assert(static_cast<C1>(std::move(c1)).x() == 3);    // cast from rvalue - temp obj created with move ctor
-    assert(static_cast<C1>(C1{-1}).x() == -1);          // cast from rvalue - different behavior with above. Probably a valid short cut
 //    assert(static_cast<C1&>(C1{-1}).x() == 3);        // compile error - C1& unable to initialize from rvalue
 //    assert(static_cast<C1&>(std::move(c1)).x() == 3);        // compile error - C1& unable to initialize from rvalue
     assert(static_cast<C1&&>(std::move(c1)).x() == -1);
     assert(static_cast<C1&&>(C1{-1}).x() == -1);
+
+    // following are subject to C++ version (17 or earlier), and the -fno-elide-constructors option
+    // Valid for C++11 with clang 7 gcc 8 with -fno-elide-constructors, but not C++17 or -fno-elide-constructors is not specified
+    assert(static_cast<C1>(factory()).x() == 3);
+    assert(static_cast<C1>(C1{-1}).x() == 3);
 
     C1 &lvalue_ref = c1;
     assert(lvalue_ref.x() == -1);
