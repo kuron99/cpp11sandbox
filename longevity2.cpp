@@ -1,6 +1,4 @@
-// longevity doesn't work when repeated
-// longevity happens only once withing the function receiving const C1 &, and when it returns as const C1&, it's not alive any more.
-// The code below doesn't crash with luck, but address sanitizer warns "Stack-use-after-scope"
+// same as longevity1.cpp for T&& - longevity doesn't work when repeated
 
 #include <string>
 #include <iostream>
@@ -29,12 +27,13 @@ public:
 private:
     int x_;
 };
-const C1& foo( const C1& s ){
-    std::cout << "exiting foo()" << std::endl;
-    return s;
+
+C1&& mymove(C1&& c1) {
+   return static_cast<C1&&>(c1);
 }
+
 int main() {
-    const C1& bar = foo( C1(100) );
-    std::cout << "exited foo()" << std::endl;
-    std::cout << bar.x() << std::endl;
+    C1&& c1 = mymove(C1(-1));
+    std::cout << c1.x() << std::endl;
 }
+
