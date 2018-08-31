@@ -1,8 +1,8 @@
-// check what type is "this"
+// whether *this should be copied or moved within clone()& or clone()&&
+// Unlikely to cv-qualifier case, in menber function qualified with & and &&,
+// "this" doesn't change - "this" is rvalue and *this is lvalue
 
 #include <iostream>
-#include <type_traits>
-#include "boost/type_index.hpp"
 
 class C1 {
 public:
@@ -26,13 +26,13 @@ public:
         return x_;
     }
     C1 * clone() & {
-        std::cout << boost::typeindex::type_id_with_cvr<decltype(this)>() << std::endl;
-//        static_assert(std::is_same<decltype(this), C1*&>::value, "true");
+        // check what type is "this"
+        static_assert(std::is_same<decltype(this), C1*>::value, "true");
         return new C1(*this);
     }
     C1 * clone() && {
-        std::cout << boost::typeindex::type_id_with_cvr<decltype(this)>() << std::endl;
-//        static_assert(std::is_same<decltype << std::endl;(this), C1*>::value, "true");
+        // check what type is "this"
+        static_assert(std::is_same<decltype(this), C1*>::value, "true");
         return new C1(std::move(*this));
     }
 private:
@@ -43,12 +43,11 @@ int main() {
     std::cout << "start main" << std::endl;
     std::cout << "clone lvalue" << std::endl;
     C1 c1{-1};
-    c1.clone();
+    assert(c1.clone()->x() == 2);
     std::cout << "clone rvalue" << std::endl;
-    C1{-2}.clone();
+    assert(C1{-2}.clone()->x() == 3);
     std::cout << "clone ptr" << std::endl;
     C1 * ptr = &c1;
-    ptr->clone();
+    assert(ptr->clone()->x() == 2);
     std::cout << "end main" << std::endl;
-    C1 *& ptr2 = ptr;
 }
