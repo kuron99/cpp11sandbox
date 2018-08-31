@@ -61,6 +61,7 @@ int main() {
     assert(lvalue_ref.x() == -1);
     assert(static_cast<C1>(lvalue_ref).x() == 2); // temp obj created with copy ctor
     assert(static_cast<C1>(std::move(lvalue_ref)).x() == 3); // temp obj created with move ctor
+    assert(static_cast<C1>(static_cast<C1&&>(lvalue_ref)).x() == 3); // static_cast<C1&&> works similar as std::move()
     assert(static_cast<C1 &>(lvalue_ref).x() == -1);
     assert(static_cast<C1 &&>(lvalue_ref).x() == -1);
 
@@ -68,6 +69,7 @@ int main() {
     assert(rvalue_ref.x() == -1);
     assert(static_cast<C1>(rvalue_ref).x() == 2); // temp obj created with copy ctor
     assert(static_cast<C1>(std::move(rvalue_ref)).x() == 3); // temp obj created with move ctor
+    assert(static_cast<C1>(static_cast<C1&&>(rvalue_ref)).x() == 3); // static_cast<C1&&> works similar as std::move()
     assert(static_cast<C1 &>(rvalue_ref).x() == -1);
     assert(static_cast<C1 &&>(rvalue_ref).x() == -1);
     cout << "end of main" << endl;
