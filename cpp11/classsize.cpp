@@ -47,6 +47,11 @@ class WithBitField33_31 {
 class WithPointer {
     C1* ptr_;
 };
+class WithReference {
+public:
+    WithReference(C1& x) : ref_(x) {}
+    C1& ref_;
+};
 
 int main() {
     static_assert(sizeof(char) == 1, "");
@@ -67,5 +72,9 @@ int main() {
     static_assert(sizeof(WithBitField1_63) == 8, ""); //
     static_assert(sizeof(WithBitField63_1) == 8, ""); //
     static_assert(sizeof(WithPointer) == 8, "");
+    static_assert(sizeof(WithReference) == 8, "");
+    C1 c1{};
+    WithReference wr{c1};
+    static_assert(sizeof(wr.ref_) == 1, ""); // this is the size of C1, not reference
 
 }
