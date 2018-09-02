@@ -26,13 +26,17 @@ public:
         return x_;
     }
     C1 * clone() & {
-        // check what type is "this"
+        // "this" is always C1* and *this is C1&
         static_assert(std::is_same<decltype(this), C1*>::value, "true");
+        static_assert(std::is_same<decltype(*this), C1&>::value, "true");
+        static_assert(!std::is_same<decltype(*this), C1&&>::value, "true");
         return new C1(*this);
     }
     C1 * clone() && {
-        // check what type is "this"
+        // "this" is always C1* and *this is C1&
         static_assert(std::is_same<decltype(this), C1*>::value, "true");
+        static_assert(std::is_same<decltype(*this), C1&>::value, "true");
+        static_assert(!std::is_same<decltype(*this), C1&&>::value, "true");
         return new C1(std::move(*this));
     }
 private:
