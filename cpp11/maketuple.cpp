@@ -1,6 +1,7 @@
+// auto for make_tuple elements are somewhat vague - const C1 becomes C1
+
 #include <type_traits>
 #include <tuple>
-#include <functional>
 
 class C1 {
 
@@ -16,7 +17,10 @@ int main() {
 
     int a = 2;
     char c = 'b';
-    char pchr[6] = "World";
+    char arr[6] = "World";
+    const char* pchr = arr;
     auto refs = std::make_tuple(std::ref(a), std::ref(c), std::ref(pchr));
-    static_assert(std::is_same<decltype(refs), std::tuple<int&, char&, char(&)[6]>>::value, "");
+    static_assert(std::is_same<decltype(refs), std::tuple<int&, char&, const char*&>>::value, "");
+    refs = tuple;
+
 }

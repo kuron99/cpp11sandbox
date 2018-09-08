@@ -1,3 +1,4 @@
+// hard to understand what special function is generated and when. Remember 5/3/0 rule.
 #include <sstream>
 #include <cassert>
 
