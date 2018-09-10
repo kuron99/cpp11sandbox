@@ -1,9 +1,8 @@
+// Type induction with universal reference
+// lvalue -> T = C1&
+// rvalue -> T = C1
 
-#include <utility>
-#include <memory>
 #include <iostream>
-#include <cassert>
-#include <type_traits>
 #include "boost/type_index.hpp"
 
 

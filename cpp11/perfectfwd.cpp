@@ -1,7 +1,5 @@
-#include <utility>
-#include <memory>
+// whether unique_ptr is received by universal reference or not
 #include <iostream>
-#include <cassert>
 
 class C1 {
 
