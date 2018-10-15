@@ -1,3 +1,5 @@
+// test watch
+
 #include <iostream>
 #include <vector>
 #include "watch.h"
@@ -17,9 +19,8 @@ int main() {
                 w1.reset();
                 v.push_back(w1.stop());
             }
-
             const long long int dur = w2.stop();
-            cout << "j" << j << "duration: " << dur << " per loop: " << (double) dur / len << "microsec." << endl;
+            cout << "j " << j << " duration: " << dur << " per loop: " << (double) dur / len << " us." << endl;
         }
     } catch (std::bad_alloc&) {
         cout << "std::bad_alloc exception caught" << endl;

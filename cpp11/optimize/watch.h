@@ -3,7 +3,7 @@
 
 class watch {
 public:
-    using clock = std::chrono::steady_clock;
+    using clock = std::chrono::high_resolution_clock;
 
     watch() {
         begin_ = clock::now();
@@ -19,5 +19,5 @@ public:
     }
 
 private:
-    std::chrono::time_point<std::chrono::steady_clock> begin_;
+    std::chrono::time_point<clock> begin_;
 };
