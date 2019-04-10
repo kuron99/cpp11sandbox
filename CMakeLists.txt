@@ -11,5 +11,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address,undefined -fno-saniti
 add_subdirectory(cpp98)
 add_subdirectory(cpp11)
 add_subdirectory(cpp17)
+add_subdirectory(cpp20)
 #add_subdirectory(glog)
 
