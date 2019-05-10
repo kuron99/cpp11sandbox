@@ -2,12 +2,25 @@
 // special generated functions ctor/dtor are noexcept by default unless base/member are potentially throwing on init
 
 #include <iostream>
+#include <map>
+#include <memory>
+#include <vector>
+#include <any>
 #include <bits/unique_ptr.h>
 
 class C1 {
 public:
     C1() = default;
+    ~C1() = default;
+    C1(C1 const& other) = default;
+    C1(C1&& other) = default;
+    C1& operator=(C1 const& other) = default;
+    C1& operator=(C1&& other) = default;
     C1(int x) {}
+    std::map<std::string, std::string> map_{};
+    std::shared_ptr<C1> model_{};
+    std::vector<std::any> values_{};
+    static std::shared_ptr<C1> EMPTY_MODEL;
 };
 
 void function_throws() {
@@ -28,7 +41,11 @@ public:
 private:
     C1 c1{1};
 };
+
 int main() {
+    static_assert(noexcept(std::map<int, int>()));
+    static_assert(std::is_nothrow_move_constructible<C1>());
+
     static_assert(!noexcept(std::make_unique<C1>()));
     static_assert(!noexcept(new C1));  // can throw bad alloc
     static_assert(!noexcept(new C2));  // can throw bad alloc
