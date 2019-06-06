@@ -68,6 +68,27 @@ class IntAndLong {
     long y_;
 };
 
+struct S1 {
+    short s;
+    char c[3];
+};
+
+struct S2 {
+    char c[10];
+    char c2;
+};
+
+struct S3 {
+    double d;
+    long long ll;
+    char c;
+};
+
+union U {
+    char str[17];
+    double[2];
+};
+
 int main() {
     static_assert(sizeof(char) == 1);
     static_assert(sizeof(int) == 4);
@@ -100,4 +121,13 @@ int main() {
     static_assert(sizeof(wr.ref_) == 1); // this is the size of C1, not reference
     WithRvalueReference wrr{C1{}};
     static_assert(sizeof(wrr.ref_) == 1); // this is the size of C1, not reference
+
+    static_assert(sizeof(S1) == 6);
+    static_assert(alignof(S1) == 2);
+    static_assert(sizeof(S2) == 11);
+    static_assert(alignof(S2) == 1);
+    static_assert(sizeof(S3) == 24);
+    static_assert(alignof(S3) == 8);
+    static_assert(sizeof(U) == 17);
+    static_assert(alignof(S3) == 8);
 }

@@ -41,6 +41,8 @@ int main() {
     static_assert(sizeof(std::variant<int64_t>) == 16);
     static_assert(sizeof(std::variant<std::string>) == 40);
     static_assert(sizeof(std::variant<int64_t, std::string>) == 40);
+    static_assert(sizeof(std::function<std::int64_t(std::int64_t)>) == 32);
+
 
     static_assert(sizeof(void*) == 8);
     static_assert(sizeof(char[6]) == 6);
