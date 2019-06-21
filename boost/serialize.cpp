@@ -8,7 +8,7 @@
 using namespace boost::serialization;
 
 class C1 {
-//    friend boost::serialization::access;
+    friend boost::serialization::access;
 public:
     C1() = default;
     C1(int x, int y) : x_(x), y_(y) {}
@@ -25,6 +25,9 @@ private:
     int x_;
     int y_;
 };
+
+static_assert(std::is_trivially_copyable_v<C1>);
+static_assert(std::is_trivially_default_constructible_v<C1>);
 
 int main() {
     std::vector<C1> vector;
