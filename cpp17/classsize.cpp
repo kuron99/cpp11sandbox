@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <utility>
+#include <chrono>
 #include "boost/multiprecision/cpp_int.hpp"
 
 class C1 {
@@ -130,4 +131,11 @@ int main() {
     static_assert(alignof(S3) == 8);
     static_assert(sizeof(U) == 17);
     static_assert(alignof(S3) == 8);
+
+    static_assert(sizeof(std::chrono::nanoseconds) == 8);
+    static_assert(sizeof(std::chrono::milliseconds) == 8);
+    static_assert(sizeof(std::chrono::microseconds) == 8);
+    static_assert(sizeof(std::chrono::hours) == 8);
+    static_assert(sizeof(std::chrono::time_point<std::chrono::steady_clock>) == 8);
+    static_assert(sizeof(std::chrono::time_point<std::chrono::high_resolution_clock >) == 8);
 }
