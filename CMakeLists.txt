@@ -8,6 +8,11 @@ add_subdirectory(asm)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-elide-constructors")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address,undefined -fno-sanitize-recover=address,undefined")
 
+if(${USE_LIBCPP})
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
+endif()
+
 add_subdirectory(cpp98)
 add_subdirectory(cpp11)
 add_subdirectory(cpp17)
