@@ -2,6 +2,12 @@
 #include <cassert>
 using namespace std;
 
+template <size_t N>
+bitset<N> next_combination(bitset<N> sub) {
+    bitset<N> x = sub & -sub, y = sub + x;
+    return (((sub & ~y) / x) >> 1) | y;
+}
+
 int main() {
     static_assert(alignof(bitset<1>) == 8);
 
@@ -43,4 +49,9 @@ int main() {
     assert(bs65.to_string() =="10000000000000000000000000000000000000000000000000000000000000000");
 //    assert(bs65.to_ulong() == 0); // std::overflow_error
 //    assert(bs65.to_ullong() == 0); // std::overflow_error
+
+    next_combination(bs1);
+
+
+
 }
