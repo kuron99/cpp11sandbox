@@ -6,7 +6,7 @@ file(GLOB SRCS "*.cpp")
 
 foreach(src IN LISTS SRCS)
     get_filename_component(fname "${src}" NAME_WE)
-    add_executable("${fname}" ${src})
+    add_executable("${fname}_cpp11" ${src})
 endforeach()
 
 add_subdirectory(optimize)

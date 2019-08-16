@@ -22,3 +22,4 @@ add_subdirectory(nortti)
 add_subdirectory(compiler_warning)
 #add_subdirectory(glog)
 
+add_subdirectory(c)
