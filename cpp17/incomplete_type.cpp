@@ -1,4 +1,9 @@
+// surprisingly incomplete type can be used vector<C1> as if it's complete type when it's resolved bottom of the file.
+// The same doesn't apply if it's used as C1 c1.
+
 #include <vector>
+#include <list>
+#include <memory>
 
 class C1;
 
@@ -10,7 +15,8 @@ public:
     std::size_t size() const noexcept { return elements_.size(); }
 private:
     std::vector<C1> elements_ {};
-    C1 c1;
+    std::pair<C1, C1> list_{};
+//    C1 c1;
 };
 
 //std::size_t f2() {
