@@ -4,6 +4,7 @@ project(cppsandbox)
 #find_package(glog REQUIRED)
 
 add_subdirectory(asm)
+add_subdirectory(malloc)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-elide-constructors")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address,undefined -fno-sanitize-recover=address,undefined")
