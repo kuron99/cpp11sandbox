@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 file(GLOB SRCS "*.cpp")
 
 find_package(Boost
-        COMPONENTS filesystem serialization thread
+        COMPONENTS filesystem serialization thread system
         REQUIRED
         )
 
@@ -19,6 +19,7 @@ foreach(src IN LISTS SRCS)
             )
     if(${fname} MATCHES "_boost4$")
         target_compile_definitions(${fname} PRIVATE BOOST_THREAD_VERSION=4)
+        target_compile_definitions(${fname} PRIVATE BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION)
     endif()
 endforeach()
 
