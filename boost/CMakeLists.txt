@@ -17,6 +17,9 @@ foreach(src IN LISTS SRCS)
             PRIVATE Boost::serialization
             PRIVATE Boost::thread
             )
+    if(${fname} MATCHES "_boost4$")
+        target_compile_definitions(${fname} PRIVATE BOOST_THREAD_VERSION=4)
+    endif()
 endforeach()
 
 # list boost target name usable in CMakeList.txt

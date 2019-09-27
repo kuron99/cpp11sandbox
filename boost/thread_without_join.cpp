@@ -1,10 +1,9 @@
+// std::thread calls std::terminate on destruction
 #include <thread>
-#include "boost/thread.hpp"
 
 void f() {
 
 }
 int main() {
-    boost::thread th{f};
-//    std::thread th2{f};
+    std::thread th2{f};  // std::terminate called on destruction
 }
