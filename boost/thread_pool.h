@@ -28,7 +28,7 @@ public:
 
     template <class F>
     void submit(F&& f) {
-        io_service_.post(std::forward(f));
+        io_service_.post(f);
     }
 private:
     boost::asio::io_service io_service_{};

@@ -19,10 +19,13 @@ int main() {
         std::cout << "packaged task " << std::endl;
         return 1;
     }};
-    task();
-//    pool.submit(std::move(task));
-    pool.submit(f);
-    pool.submit(f);
-    pool.submit(f);
+//    task();
+    auto future = task.get_future();
+    pool.submit(task);
+    pool.submit(std::ref(task));
     std::this_thread::sleep_for(1s);
+    std::cout << future.get() << std::endl;
+    pool.submit(f);
+//    pool.submit(f);
+//    pool.submit(f);
 }
