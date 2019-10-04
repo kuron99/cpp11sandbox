@@ -1,14 +1,20 @@
-// boost::thread automatically detach on destruction in boost thread version 2
+// boost::future has then() method
+
+#include <cassert>
 #include "boost/thread.hpp"
 #include "boost/asio.hpp"
+#include "boost/thread/future.hpp"
 
 void f() {
 
 }
-int main() {
-    boost::thread th{f};
-    auto fut = boost::async(boost::launch::async, []() {
 
+int main() {
+    auto fut = boost::async(boost::launch::async, []() -> int {
+        return 1;
     });
-//    fut.then(boost::launch::async, [](){});
+    auto f2 = fut.then([](boost::future<int> x) -> int {
+        return x.get();
+    });
+    assert(1 == f2.get());
 }

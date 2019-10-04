@@ -19,7 +19,6 @@ foreach(src IN LISTS SRCS)
             )
     if(${fname} MATCHES "_boost4$")
         target_compile_definitions(${fname} PRIVATE BOOST_THREAD_VERSION=4)
-        target_compile_definitions(${fname} PRIVATE BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION)
     endif()
 endforeach()
 
