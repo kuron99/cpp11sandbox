@@ -56,6 +56,8 @@ int main() {
 
     static_assert(sizeof(void*) == 8);
     static_assert(sizeof(char[6]) == 6);
+
+    static_assert(sizeof(std::reference_wrapper<int64_t>) == 8);
 }
 
 #endif // ifndef ciso646d
