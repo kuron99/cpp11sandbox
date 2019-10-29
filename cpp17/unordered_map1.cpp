@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 #include <cassert>
-#include <iostream>
+#include <string>
 
 int main() {
     std::unordered_map<std::int64_t, std::string> map{};
