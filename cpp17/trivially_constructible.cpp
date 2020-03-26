@@ -47,4 +47,12 @@ int main() {
     static_assert(std::is_trivially_default_constructible_v<C6>);
 
     static_assert(!std::is_trivially_constructible_v<std::unique_ptr<int>, int*>);
+
+//    error !! class with non-trivial default constructor cannot be a member of union
+//    union U1 {
+//        C4 x;
+//    };
+//    U1 u;
+//    u.x.x_++;
+
 }
