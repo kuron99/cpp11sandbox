@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 file(GLOB SRCS "*.cpp")
 
 find_package(Boost
-        COMPONENTS filesystem serialization thread system
+        COMPONENTS filesystem serialization thread system stacktrace_backtrace
         REQUIRED
         )
 
@@ -16,6 +16,9 @@ foreach(src IN LISTS SRCS)
             PRIVATE Boost::filesystem
             PRIVATE Boost::serialization
             PRIVATE Boost::thread
+            PRIVATE Boost::system
+            PRIVATE Boost::stacktrace_backtrace
+            PRIVATE glog::glog
             )
     if(${fname} MATCHES "_boost4$")
         target_compile_definitions(${fname} PRIVATE BOOST_THREAD_VERSION=4)

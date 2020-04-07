@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(cppsandbox)
 
-#find_package(glog REQUIRED)
+find_package(glog REQUIRED)
 
 add_subdirectory(asm)
 add_subdirectory(malloc)
