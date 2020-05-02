@@ -15,7 +15,7 @@ public:
     std::size_t size() const noexcept { return elements_.size(); }
 private:
     std::vector<C1> elements_ {};
-    std::pair<C1, C1> list_{};
+//    std::pair<C1, C1> list_{};
 //    C1 c1;
 };
 
@@ -26,7 +26,7 @@ private:
 //}
 
 int main() {
-//    A1 c1{};
+    A1 c1{};
 
 }
 class C1 {};
