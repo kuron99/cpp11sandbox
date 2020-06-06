@@ -58,6 +58,13 @@ int main() {
     static_assert(sizeof(char[6]) == 6);
 
     static_assert(sizeof(std::reference_wrapper<int64_t>) == 8);
+
+    static_assert(sizeof(std::mutex) == 40);
+    static_assert(sizeof(std::condition_variable) == 48);
+
+    static_assert(sizeof(std::atomic<std::int32_t>) == 4);
+    static_assert(sizeof(std::atomic<std::int64_t>) == 8);
+    static_assert(sizeof(std::atomic<double>) == 8);
 }
 
 #endif // ifndef ciso646d
