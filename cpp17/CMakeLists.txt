@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 file(GLOB SRCS
         "*.cpp"
         "basic_io/*.cpp"
+        "cyclic_dependency/*.cpp"
+        "declaration_only/*.cpp"
         )
 
 foreach(src IN LISTS SRCS)
