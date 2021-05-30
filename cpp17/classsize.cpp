@@ -87,7 +87,7 @@ struct S3 {
 
 union U {
     char str[17];
-    double[2];
+    double d[2];
 };
 
 int main() {
@@ -129,8 +129,8 @@ int main() {
     static_assert(alignof(S2) == 1);
     static_assert(sizeof(S3) == 24);
     static_assert(alignof(S3) == 8);
-    static_assert(sizeof(U) == 17);
-    static_assert(alignof(S3) == 8);
+    static_assert(sizeof(U) == 24);
+    static_assert(alignof(U) == 8);
 
     static_assert(sizeof(std::chrono::nanoseconds) == 8);
     static_assert(sizeof(std::chrono::milliseconds) == 8);
