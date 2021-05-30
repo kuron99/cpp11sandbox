@@ -4,6 +4,7 @@
 #include <any>
 #include <memory>
 #include <tuple>
+#include <utility>
 #include <optional>
 #include <vector>
 #include <string>
@@ -38,6 +39,10 @@ int main() {
     static_assert(sizeof(std::optional<std::string_view>) == 24); // string_view + bool
     static_assert(sizeof(std::tuple<int32_t>) == 4);
     static_assert(sizeof(std::tuple<int64_t>) == 8);
+    static_assert(sizeof(std::pair<int8_t, int8_t>) == 2);
+    static_assert(sizeof(std::pair<int8_t, int16_t>) == 4);
+    static_assert(sizeof(std::pair<int32_t, int32_t>) == 8);
+    static_assert(sizeof(std::pair<void*, void*>) == 16);
     static_assert(sizeof(std::tuple<int64_t, int64_t>) == 16);
     static_assert(sizeof(std::tuple<int64_t, int64_t, int64_t>) == 24);
     static_assert(alignof(std::tuple<int64_t, int64_t, int64_t>) == 8);
