@@ -9,6 +9,7 @@ file(GLOB SRCS
         "basic_io/*.cpp"
         "cyclic_dependency/*.cpp"
         "declaration_only/*.cpp"
+        "mt/*.cpp"
         )
 
 foreach(src IN LISTS SRCS)
