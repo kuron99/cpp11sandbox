@@ -14,5 +14,5 @@ file(GLOB SRCS
 
 foreach(src IN LISTS SRCS)
     get_filename_component(fname "${src}" NAME_WE)
-    add_executable("${fname}" ${src})
+    add_executable("${fname}" ${src} ../cpp20/mt/atomic_flag_ping_pong.cpp)
 endforeach()
